@@ -6,7 +6,7 @@ export default class App {
     this.app = express()
   }
 
-  listen() {
-    this.app.listen(3333, () => console.log('server is running'))
+  listen(port: number | string) {
+    this.app.listen(port, () => console.log(`server is running on ${port}`))
   }
 }
