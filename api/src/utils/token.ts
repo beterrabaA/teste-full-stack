@@ -8,3 +8,5 @@ interface User {
 }
 
 const secret = process.env.JTW_SECRET as string
+
+export const tokenGenerator = (payload: User) => sign(payload, secret)
