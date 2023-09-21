@@ -1,3 +1,9 @@
 import { NextFunction, Request, Response } from 'express'
 
-export default class TokenValidator {}
+export default class TokenValidator {
+  public validateJWT = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {}
+}
