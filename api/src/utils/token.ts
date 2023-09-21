@@ -10,3 +10,5 @@ interface User {
 const secret = process.env.JTW_SECRET as string
 
 export const tokenGenerator = (payload: User) => sign(payload, secret)
+
+export const tokenDecoder = (token: string) => verify(token, secret)
