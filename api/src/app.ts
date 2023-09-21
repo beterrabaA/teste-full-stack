@@ -1,10 +1,17 @@
 import express, { Application } from 'express'
+import UserRouter from './routes/user.routes'
 
 export default class App {
   public app: Application
+  private userRoutes = new UserRouter()
   constructor() {
     this.app = express()
     this.middlewaresInitialize()
+    this.initialzeRoutes()
+  }
+
+  private initialzeRoutes() {
+    this.app.use('/events', this.userRoutes.router)
   }
 
   private middlewaresInitialize() {
