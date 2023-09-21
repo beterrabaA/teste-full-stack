@@ -5,4 +5,8 @@ export default class App {
   constructor() {
     this.app = express()
   }
+
+  listen() {
+    this.app.listen(3333, () => console.log('server is running'))
+  }
 }
