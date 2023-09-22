@@ -1,6 +1,5 @@
 import { Router } from 'express'
 import UserController from '../controllers/user.controller'
-import UserService from '../services/user.service'
 
 export default class UserRouter {
   public router: Router
@@ -16,5 +15,7 @@ export default class UserRouter {
       '/register',
       this.controller.register.bind(this.controller),
     )
+
+    this.router.post('/login', this.controller.login.bind(this.controller))
   }
 }
