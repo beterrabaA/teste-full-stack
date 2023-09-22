@@ -19,9 +19,6 @@ export default class UserRouter {
       this.controller.register.bind(this.controller),
     )
 
-    this.router.post(
-      '/login',
-      this.controller.login.bind(this.controller),
-    )
+    this.router.post('/login', this.controller.login.bind(this.controller))
   }
 }
