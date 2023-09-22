@@ -9,6 +9,18 @@ export default class UserController {
     this.service = new UserService()
   }
 
+  public async userLoggedId(
+    req: CustomRequest,
+    res: Response,
+  ): Promise<Response> {
+    try {
+      const { userId } = req
+      return res.json({ userId })
+    } catch (error) {
+      return res.status(400).json({ message: 'user not found' })
+    }
+  }
+
   public async register(req: Request, res: Response): Promise<Response> {
     const { username, email, password } = req.body
     try {
