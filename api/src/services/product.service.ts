@@ -21,4 +21,18 @@ export default class ProductService {
 
     return productList
   }
+
+  async getById(id: string): Promise<Product> {
+    const product = await this.productModel.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (!product) {
+      throw new Error('Product not found')
+    }
+
+    return product
+  }
 }
