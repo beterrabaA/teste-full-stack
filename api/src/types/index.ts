@@ -9,3 +9,11 @@ export interface IUser {
 export interface CustomRequest extends Request {
   userId?: string
 }
+
+export interface IProduct {
+  createdById: string
+  name: string
+  description: string
+  category: string
+  price: number
+}
