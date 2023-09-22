@@ -37,4 +37,15 @@ export default class UserService {
 
     return user
   }
+
+  public async getUserById(id: string): Promise<User> {
+    const user = await this.userModel.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (!user) throw new Error('User not found')
+    return user
+  }
 }
