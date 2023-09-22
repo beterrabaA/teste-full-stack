@@ -1,9 +1,11 @@
 import express, { Application } from 'express'
 import UserRouter from './routes/user.routes'
+import ProductRouter from './routes/product.routes'
 
 export default class App {
   public app: Application
   private userRoutes = new UserRouter()
+  private productRoutes = new ProductRouter()
   constructor() {
     this.app = express()
     this.middlewaresInitialize()
@@ -12,6 +14,7 @@ export default class App {
 
   private initialzeRoutes() {
     this.app.use('/user', this.userRoutes.router)
+    this.app.use('/product', this.productRoutes.router)
   }
 
   private middlewaresInitialize() {
