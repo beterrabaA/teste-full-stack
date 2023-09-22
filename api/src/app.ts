@@ -11,7 +11,7 @@ export default class App {
   }
 
   private initialzeRoutes() {
-    this.app.use('/events', this.userRoutes.router)
+    this.app.use('/user', this.userRoutes.router)
   }
 
   private middlewaresInitialize() {
