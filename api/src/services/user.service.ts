@@ -23,4 +23,18 @@ export default class UserService {
     })
     return newUser
   }
+
+  public async login(email: string, password: string): Promise<User> {
+    const user = await this.userModel.findUnique({
+      where: {
+        email,
+      },
+    })
+
+    if (!user) throw new Error('User not found')
+    const vPass = bcrypt.compareSync(password, user.password)
+    if (!vPass) throw new Error('Password invalid')
+
+    return user
+  }
 }
