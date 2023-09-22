@@ -62,4 +62,16 @@ export default class ProductService {
 
     return updatedProduct
   }
+
+  async delete(id: string): Promise<void> {
+    const deletedProduct = await this.productModel.delete({
+      where: {
+        id,
+      },
+    })
+
+    if (!deletedProduct) {
+      throw new Error('Product not deleted')
+    }
+  }
 }
