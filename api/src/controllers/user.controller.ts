@@ -25,4 +25,19 @@ export default class UserController {
         .json({ message: 'email already in use or password invalid' })
     }
   }
+
+  public async login(req: CustomRequest, res: Response): Promise<Response> {
+    const { email, password } = req.body
+    try {
+      const user = await this.service.login(email, password)
+      const token = tokenGenerator({
+        id: user.id,
+        email: user.email,
+        password: user.password,
+      })
+      return res.json({ token })
+    } catch (error) {
+      return res.status(403).json({ message: 'email or password invalid' })
+    }
+  }
 }
