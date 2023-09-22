@@ -35,4 +35,16 @@ export default class ProductService {
 
     return product
   }
+
+  async create(product: IProduct): Promise<Product> {
+    const createdProduct = await this.productModel.create({
+      data: product,
+    })
+
+    if (!createdProduct) {
+      throw new Error('Product not created')
+    }
+
+    return createdProduct
+  }
 }
