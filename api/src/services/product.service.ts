@@ -47,4 +47,19 @@ export default class ProductService {
 
     return createdProduct
   }
+
+  async update(id: string, product: IProduct): Promise<Product> {
+    const updatedProduct = await this.productModel.update({
+      where: {
+        id,
+      },
+      data: product,
+    })
+
+    if (!updatedProduct) {
+      throw new Error('Product not updated')
+    }
+
+    return updatedProduct
+  }
 }
