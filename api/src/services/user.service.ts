@@ -1,4 +1,5 @@
 import prismadb from '../lib/prismadb'
+import bcrypt from 'bcrypt'
 import { User } from '@prisma/client'
 
 export default class UserService {
@@ -12,14 +13,14 @@ export default class UserService {
     email: string,
     password: string,
   ): Promise<User> {
+    const hashedPwd = await bcrypt.hash(password, 12)
     const newUser = await this.userModel.create({
       data: {
         email,
         username,
-        password,
+        password: hashedPwd,
       },
     })
-    console.log('registering user')
     return newUser
   }
 }
