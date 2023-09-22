@@ -16,4 +16,8 @@ export default class ProductRouter {
   public initializeMiddlewares() {
     this.router.use(this.auth.validateJWT)
   }
+
+  public initializeRoutes() {
+    this.router.get('/', this.controller.getAll.bind(this.controller))
+  }
 }
