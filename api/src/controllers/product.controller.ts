@@ -30,4 +30,25 @@ export default class ProductController {
       return res.status(400).json({ error })
     }
   }
+
+  public async create(req: CustomRequest, res: Response): Promise<Response> {
+    const { userId } = req
+    const { name, description, category, price } = req.body
+    if (!userId) {
+      return res.status(401).json({ message: 'user id empty' })
+    }
+    try {
+      const bodyProduct = {
+        createdById: userId,
+        name,
+        description,
+        category,
+        price,
+      }
+      const product = await this.service.create(bodyProduct)
+      return res.status(201).json(product)
+    } catch (error) {
+      return res.status(400).json({ error })
+    }
+  }
 }
