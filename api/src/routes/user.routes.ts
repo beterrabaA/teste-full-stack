@@ -1,21 +1,25 @@
 import { Router } from 'express'
 import UserController from '../controllers/user.controller'
 import JWTMiddleware from '../middlewares/auth'
+import Credentials from '../middlewares/credentials'
 
 export default class UserRouter {
   public router: Router
   private controller: UserController
   private auth: JWTMiddleware
+  private crendentials: Credentials
   constructor() {
     this.router = Router()
     this.controller = new UserController()
     this.auth = new JWTMiddleware()
+    this.crendentials = new Credentials()
     this.initializeRoutes()
   }
 
-  public initializeRoutes() {
+  private initializeRoutes() {
     this.router.post(
       '/register',
+      this.crendentials.validateCredentials,
       this.controller.register.bind(this.controller),
     )
 
@@ -25,6 +29,10 @@ export default class UserRouter {
       this.controller.login.bind(this.controller),
     )
 
-    this.router.post('/login', this.controller.login.bind(this.controller))
+    this.router.post(
+      '/login',
+      this.crendentials.validateCredentials,
+      this.controller.login.bind(this.controller),
+    )
   }
 }
