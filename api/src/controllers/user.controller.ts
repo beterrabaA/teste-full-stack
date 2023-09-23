@@ -25,12 +25,7 @@ export default class UserController {
     const { username, email, password } = req.body
     try {
       const user = await this.service.register(username, email, password)
-      const token = tokenGenerator({
-        id: user.id,
-        email: user.email,
-        password: user.password,
-      })
-      return res.status(400).json({ token })
+      return res.status(201).json(user)
     } catch (error) {
       return res
         .status(400)
