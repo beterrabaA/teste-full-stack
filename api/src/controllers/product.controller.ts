@@ -76,4 +76,14 @@ export default class ProductController {
       return res.status(400).json({ error })
     }
   }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params
+    try {
+      await this.service.delete(id)
+      return res.status(204).json()
+    } catch (error) {
+      return res.status(400).json({ error })
+    }
+  }
 }
