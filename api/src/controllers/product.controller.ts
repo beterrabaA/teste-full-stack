@@ -55,6 +55,7 @@ export default class ProductController {
 
   public async update(req: CustomRequest, res: Response): Promise<Response> {
     const { userId } = req
+    const { id } = req.params
     const { name, description, category, price } = req.body
 
     if (!userId) {
@@ -70,7 +71,7 @@ export default class ProductController {
         price,
       }
 
-      const updatedProduct = await this.service.update(userId, bodyProduct)
+      const updatedProduct = await this.service.update(id, bodyProduct)
       return res.status(201).json(updatedProduct)
     } catch (error) {
       return res.status(400).json({ error })
