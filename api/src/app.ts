@@ -22,7 +22,8 @@ export default class App {
     this.app.use(express.urlencoded({ extended: true }))
   }
 
-  listen(port: number | string) {
-    this.app.listen(port, () => console.log(`server is running on ${port}`))
+  listen() {
+    const PORT = process.env.API_PORT || 3333
+    this.app.listen(PORT, () => console.log(`server is running on ${PORT}`))
   }
 }
