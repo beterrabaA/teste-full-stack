@@ -11,13 +11,14 @@ export default class ProductRouter {
     this.controller = new ProductController()
     this.auth = new JWTMiddleware()
     this.initializeMiddlewares()
+    this.initializeRoutes()
   }
 
-  public initializeMiddlewares() {
+  private initializeMiddlewares() {
     this.router.use(this.auth.validateJWT)
   }
 
-  public initializeRoutes() {
+  private initializeRoutes() {
     this.router.get('/', this.controller.getAll.bind(this.controller))
     this.router.get('/:id', this.controller.getById.bind(this.controller))
     this.router.post('/', this.controller.create.bind(this.controller))
