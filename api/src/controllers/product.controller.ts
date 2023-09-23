@@ -34,6 +34,7 @@ export default class ProductController {
   public async create(req: CustomRequest, res: Response): Promise<Response> {
     const { userId } = req
     const { name, description, category, price } = req.body
+
     if (!userId) {
       return res.status(401).json({ message: 'user id empty' })
     }
@@ -45,8 +46,32 @@ export default class ProductController {
         category,
         price,
       }
-      const product = await this.service.create(bodyProduct)
-      return res.status(201).json(product)
+      const newProduct = await this.service.create(bodyProduct)
+      return res.status(201).json(newProduct)
+    } catch (error) {
+      return res.status(400).json({ error })
+    }
+  }
+
+  public async update(req: CustomRequest, res: Response): Promise<Response> {
+    const { userId } = req
+    const { name, description, category, price } = req.body
+
+    if (!userId) {
+      return res.status(401).json({ message: 'user id empty' })
+    }
+
+    try {
+      const bodyProduct = {
+        createdById: userId,
+        name,
+        description,
+        category,
+        price,
+      }
+
+      const updatedProduct = await this.service.update(userId, bodyProduct)
+      return res.status(201).json(updatedProduct)
     } catch (error) {
       return res.status(400).json({ error })
     }
