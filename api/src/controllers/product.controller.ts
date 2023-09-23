@@ -20,4 +20,14 @@ export default class ProductController {
       return res.status(400).json({ error })
     }
   }
+
+  public async getById(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params
+    try {
+      const product = await this.service.getById(id)
+      return res.status(200).json(product)
+    } catch (error) {
+      return res.status(400).json({ error })
+    }
+  }
 }
