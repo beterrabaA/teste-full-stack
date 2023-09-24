@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import ProductController from '../controllers/product.controller'
-import JWTMiddleware from '../middlewares/auth'
+import JWTMiddleware from '../middlewares/auth.middleware'
 
 export default class ProductRouter {
   public router: Router

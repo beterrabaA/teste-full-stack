@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import UserController from '../controllers/user.controller'
-import JWTMiddleware from '../middlewares/auth'
-import Credentials from '../middlewares/credentials'
+import JWTMiddleware from '../middlewares/auth.middleware'
+import Credentials from '../middlewares/credentials.middleware'
 
 export default class UserRouter {
   public router: Router
