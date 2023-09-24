@@ -1,6 +1,25 @@
 version: '3.9'
 
 services:
+  backend:
+    container_name: app_backend
+    build: ./api
+    ports:
+      - 3001:3001
+    platform: linux/x86_64
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    environment:
+      - API_PORT=3001
+      - JWT_SECRET=jwt_secret
+      - DATABASE_URL=postgresql://postgres:1234@postgres_db:5432/products?schema=public
+      - CRYPTO_SALT="2e080c00d4dde61699e0b8b98c66a677"
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"]
+      timeout: 10s
+      retries: 5
+
   postgres_db:
     image: postgres:16.0-alpine
     container_name: app_db
