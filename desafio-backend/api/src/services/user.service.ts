@@ -1,6 +1,6 @@
 import prismadb from '../lib/prismadb'
-import bcrypt from 'bcrypt'
 import { User } from '@prisma/client'
+import { hashDecode, hashEncode } from '../utils/hash'
 
 export default class UserService {
   private userModel
@@ -13,7 +13,10 @@ export default class UserService {
     email: string,
     password: string,
   ): Promise<User> {
-    const hashedPwd = await bcrypt.hash(password, 12)
+    console.log(username, email, password)
+
+    const hashedPwd = hashEncode(password)
+    console.log(hashedPwd)
     const newUser = await this.userModel.create({
       data: {
         email,
@@ -21,6 +24,8 @@ export default class UserService {
         password: hashedPwd,
       },
     })
+    console.log(newUser)
+
     return newUser
   }
 
@@ -32,7 +37,7 @@ export default class UserService {
     })
 
     if (!user) throw new Error('User not found')
-    const vPass = bcrypt.compareSync(password, user.password)
+    const vPass = hashDecode(password, user.password)
     if (!vPass) throw new Error('Password invalid')
 
     return user
