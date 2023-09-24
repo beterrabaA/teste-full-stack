@@ -11,7 +11,8 @@
     "build": "npx -y tsc",
     "dev": "tsx watch ./src/main.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ./src --ext .ts"
+    "lint": "eslint ./src --ext .ts",
+    "perso":"/bin/sh start.sh"
   },
   "keywords": [],
   "author": "",
