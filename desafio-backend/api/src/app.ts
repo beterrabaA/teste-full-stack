@@ -1,7 +1,8 @@
 import express, { Application } from 'express'
+import cors from 'cors'
 import UserRouter from './routes/user.routes'
 import ProductRouter from './routes/product.routes'
-import cors from 'cors'
+import { errorMiddleware } from './middlewares/error.middleware'
 
 export default class App {
   public app: Application
@@ -12,6 +13,11 @@ export default class App {
     this.configureCors()
     this.middlewaresInitialize()
     this.initialzeRoutes()
+    this.interceptionError()
+  }
+
+  private interceptionError() {
+    this.app.use(errorMiddleware)
   }
 
   private initialzeRoutes() {
