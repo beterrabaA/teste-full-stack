@@ -1,6 +1,7 @@
 import express, { Application } from 'express'
 import UserRouter from './routes/user.routes'
 import ProductRouter from './routes/product.routes'
+import cors from 'cors'
 
 export default class App {
   public app: Application
@@ -8,6 +9,7 @@ export default class App {
   private productRoutes = new ProductRouter()
   constructor() {
     this.app = express()
+    this.configureCors()
     this.middlewaresInitialize()
     this.initialzeRoutes()
   }
@@ -20,6 +22,17 @@ export default class App {
   private middlewaresInitialize() {
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
+  }
+
+  private configureCors() {
+    const corsOptions = {
+      origin: '*',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      credentials: true,
+      optionsSuccessStatus: 204,
+    }
+
+    this.app.use(cors(corsOptions))
   }
 
   listen() {
