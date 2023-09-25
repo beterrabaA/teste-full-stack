@@ -19,8 +19,6 @@ const RegisterForm = () => {
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    console.log(process.env.NTESTE)
-    console.log(process.env.NEXT_PUBLIC_API_URL)
 
     try {
       await axios
@@ -43,7 +41,6 @@ const RegisterForm = () => {
         <Label htmlFor="username">Username(optional)</Label>
         <Input
           className="w-full"
-          required
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           id="username"
