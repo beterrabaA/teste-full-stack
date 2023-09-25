@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
+
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Alert } from '@/components/ui/alert'
@@ -11,11 +12,14 @@ const LoginForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
+
   const router = useRouter()
+
   const onSubmit = (event: FormEvent) => {
     event.preventDefault()
     console.log('submit')
   }
+
   return (
     <form onSubmit={onSubmit} className="space-y-12 w-full sm:w-[400px] ml-0">
       <div className="grid w-full items-center gap-1.5">
