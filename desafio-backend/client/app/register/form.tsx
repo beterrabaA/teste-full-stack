@@ -29,7 +29,10 @@ const RegisterForm = () => {
           password,
           username,
         })
-        router.push('/login')
+        .then((res) => {
+          console.log(res.data)
+          router.push('/login')
+        })
     } catch (error) {
       setError(true)
     }
