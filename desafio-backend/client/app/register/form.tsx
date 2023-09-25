@@ -1,5 +1,7 @@
 'use client'
 
+import getConfig from 'next/config'
+import 'dotenv/config'
 import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Label } from '@/components/ui/label'
@@ -15,10 +17,13 @@ const RegisterForm = () => {
   const [error, setError] = useState(false)
   const router = useRouter()
 
-  const onSubmit = (event: FormEvent) => {
+  const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
+    console.log(process.env.NTESTE)
+    console.log(process.env.NEXT_PUBLIC_API_URL)
+
     try {
-      axios
+      await axios
         .post(`${process.env.NEXT_PUBLIC_API_URL}/user/register`, {
           email,
           password,
@@ -29,6 +34,8 @@ const RegisterForm = () => {
           router.push('/login')
         })
     } catch (error) {
+      console.log(error);
+      
       setError(true)
     }
   }

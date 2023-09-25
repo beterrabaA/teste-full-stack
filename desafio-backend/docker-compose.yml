@@ -9,6 +9,8 @@ services:
     depends_on:
       backend:
         condition: service_healthy
+    environment:
+      - NEXT_PUBLIC_API_URL=app_backend:3001
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3000"]  # Caso utilize outra porta interna para o front, altere ela aqui também
       timeout: 10s
