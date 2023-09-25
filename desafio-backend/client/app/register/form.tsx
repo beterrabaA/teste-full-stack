@@ -21,16 +21,14 @@ const RegisterForm = () => {
     event.preventDefault()
 
     try {
-      await axios
+      const { data } = await axios
         .post(`${process.env.NEXT_PUBLIC_API_URL}/user/register`, {
           email,
           password,
           username,
         })
-        .then((res) => {
-          console.log(res.data)
-          router.push('/login')
-        })
+      console.log(data)
+      router.push('/login')
     } catch (error) {
       setError(true)
     }

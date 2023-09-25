@@ -1,5 +1,7 @@
 'use client'
 
+import axios from 'axios'
+
 import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -15,9 +17,22 @@ const LoginForm = () => {
 
   const router = useRouter()
 
-  const onSubmit = (event: FormEvent) => {
+  const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
     console.log('submit')
+
+    try {
+      const { data } = await axios
+        .post(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
+          email,
+          password,
+        })
+      console.log(data)
+      router.push('/')
+
+    } catch (error) {
+      setError(true)
+    }
   }
 
   return (
