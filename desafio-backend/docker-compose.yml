@@ -13,11 +13,13 @@ services:
       test: ["CMD", "lsof", "-t", "-i:3000"]  # Caso utilize outra porta interna para o front, altere ela aqui também
       timeout: 10s
       retries: 5
+
   backend:
     container_name: app_backend
     build: ./api
     ports:
       - 3001:3001
+    platform: linux/x86_64
     depends_on:
       postgres_db:
         condition: service_healthy
