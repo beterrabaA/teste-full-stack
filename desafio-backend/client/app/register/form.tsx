@@ -31,8 +31,6 @@ const RegisterForm = () => {
         })
         router.push('/login')
     } catch (error) {
-      console.log(error);
-      
       setError(true)
     }
   }
