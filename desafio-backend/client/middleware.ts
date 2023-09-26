@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { cookies, headers } from 'next/headers'
+import { cookies } from 'next/headers'
 
-interface CustomRequest extends NextRequest {
-  userId?: string
-}
+export function middleware(req: NextRequest) {
+  const cookie = cookies()
 
-export function middleware(req: CustomRequest) {
-  const header = headers()
-  if (!header.get('Authorization')) {
+  if (!cookie.get('token')) {
     return NextResponse.redirect(new URL('/login', req.url))
   }
 }

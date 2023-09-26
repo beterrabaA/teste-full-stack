@@ -13,10 +13,8 @@ export default class UserService {
     email: string,
     password: string,
   ): Promise<User> {
-    console.log(username, email, password)
-
     const hashedPwd = hashEncode(password)
-    console.log(hashedPwd)
+
     const newUser = await this.userModel.create({
       data: {
         email,
@@ -24,7 +22,6 @@ export default class UserService {
         password: hashedPwd,
       },
     })
-    console.log(newUser)
 
     return newUser
   }

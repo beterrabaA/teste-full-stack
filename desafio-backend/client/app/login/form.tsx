@@ -19,8 +19,6 @@ const LoginForm = () => {
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    console.log('submit')
-
     try {
       const { data } = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/user/login`,
@@ -29,7 +27,6 @@ const LoginForm = () => {
           password,
         },
       )
-      console.log(data)
       const token = data.token
       await axios.post('/api/auth/login', { token })
       router.push('/')
