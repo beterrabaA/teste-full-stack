@@ -1,14 +1,14 @@
-import { fetchBeers } from '@/utils'
-
+import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
+
 import BeerCard from '@/components/BeerCard'
 import SearchBar from '@/components/SearchBar'
-import CustomFilter from '@/components/CustomFilter'
-import { filter, order } from '@/constants'
-import { HomeProps } from '@/types'
 import ShowMore from '@/components/ShowMore'
-import { redirect } from 'next/navigation'
 import LogoutButton from '@/components/LogoutButton'
+
+import { fetchBeers } from '@/utils'
+
+import { HomeProps } from '@/types'
 
 export default async function Home({ searchParams }: HomeProps) {
   const beers = await fetchBeers({
@@ -30,8 +30,6 @@ export default async function Home({ searchParams }: HomeProps) {
       <div className="mt-12 w-full flex-between items-center flex-wrap gap-5">
         <SearchBar />
         <div className="flex justify-start flex-wrap items-center gap-2">
-          {/* <CustomFilter title="filter" options={filter} /> */}
-          <CustomFilter title="order" options={order} />
           <LogoutButton />
         </div>
       </div>
