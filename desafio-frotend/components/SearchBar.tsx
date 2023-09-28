@@ -14,6 +14,13 @@ const SearchBar = () => {
     updateSearchParams()
   }
 
+  const cleanSearch = () => {
+    setModel('')
+    const searchParams = new URLSearchParams(window.location.search)
+
+    searchParams.delete('search')
+  }
+
   const updateSearchParams = () => {
     const searchParams = new URLSearchParams(window.location.search)
 
@@ -23,8 +30,6 @@ const SearchBar = () => {
 
     router.push(newPathname)
   }
-
-  console.log(filterOptionsText)
 
   return (
     <form
@@ -46,6 +51,7 @@ const SearchBar = () => {
         />
         <button
           type="button"
+          onClick={() => cleanSearch()}
           className="bg-gray-100 max-sm:hidden px-4 p-2 rounded-3xl"
         >
           Limpar
