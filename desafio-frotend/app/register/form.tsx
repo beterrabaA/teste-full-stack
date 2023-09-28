@@ -17,30 +17,31 @@ const RegisterForm = () => {
   const [error, setError] = useState(false)
   const router = useRouter()
 
-  const handleDisable = () => {
+  const handleDisable = (): boolean => {
     const MIN_PASSWORD_LENGTH = 6
     const condition1 = email.match(/\S+@+\S+\.+com/i)
     const condition2 = password.length > MIN_PASSWORD_LENGTH
     return !(condition1 && condition2)
   }
 
-  const usersLocated = JSON.parse(
-    localStorage.getItem('users') || '[]',
-  ) as RegisterInputProps[]
-
-  const isUnique = usersLocated.find((u) => u.email === email)
-
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
+    if (typeof window !== 'undefined') {
+      const usersLocated = JSON.parse(
+        localStorage.getItem('users') || '[]',
+      ) as RegisterInputProps[]
 
-    if (isUnique) {
-      setError(true)
-      return
+      const isUnique = usersLocated.find((u) => u.email === email)
+
+      if (isUnique) {
+        setError(true)
+        return
+      }
+
+      usersLocated.push({ username, email, password })
+      localStorage.setItem('users', JSON.stringify(usersLocated))
+      router.push('/login')
     }
-
-    usersLocated.push({ username, email, password })
-    localStorage.setItem('users', JSON.stringify(usersLocated))
-    router.push('/login')
   }
 
   return (
