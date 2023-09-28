@@ -6,14 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "publish": "docker build desafio-frontend ."
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+    "@radix-ui/react-label": "^2.0.2",
     "axios": "^1.5.0",
+    "class-variance-authority": "^0.7.0",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.1.0",
